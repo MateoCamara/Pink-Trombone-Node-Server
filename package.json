@@ -1,0 +1,21 @@
+{
+  "name": "node_pink_trombone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/models/audioSystem.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "audiobuffer": "^0.2.0",
+    "audiobuffer-slice": "^0.0.7",
+    "audiobuffer-to-wav": "^1.0.0",
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "save": "^2.9.0",
+    "wav": "^1.0.2",
+    "yargs": "^17.7.2"
+  }
+}
