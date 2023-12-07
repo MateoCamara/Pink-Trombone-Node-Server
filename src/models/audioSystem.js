@@ -1,5 +1,3 @@
-let fs = require('fs');
-
 class AudioSystem {
     constructor(glottis, tract, touches) {
         this.glottis = glottis;
