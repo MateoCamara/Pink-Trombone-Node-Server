@@ -348,22 +348,16 @@ class Tract {
 
     handleTouches()
     {
-        let tractCanvasHeight = 600
+        let tractCanvasHeight = 600;
+        this.tongueTouch = 0; // Reset directo sin verificación
 
-        if (this.tongueTouch !== 0) this.tongueTouch = 0;
-
-        if (this.tongueTouch === 0)
-        {
-            for (let j=0; j<this.touches.length; j++)
-            {
-                let touch = this.touches[j];
-                let index = touch[0];
-                let diameter = touch[1];
-                if (index >= this.tongueLowerIndexBound-4 && index<=this.tongueUpperIndexBound+4
-                    && diameter >= this.innerTongueControlRadius-0.5 && diameter <= this.outerTongueControlRadius+0.5)
-                {
-                    this.tongueTouch = touch;
-                }
+        // Procesar los toques para determinar this.tongueTouch
+        for (let touch of this.touches) {
+            let [index, diameter] = touch;
+            if (index >= this.tongueLowerIndexBound && index <= this.tongueUpperIndexBound &&
+                diameter >= this.innerTongueControlRadius && diameter <= this.outerTongueControlRadius) {
+                this.tongueTouch = touch;
+                break;
             }
         }
 
@@ -384,13 +378,17 @@ class Tract {
         this.setRestDiameter();
         for (let i=0; i<this.n; i++) this.targetDiameter[i] = this.restDiameter[i];
 
+        let nonTongueTouches = this.touches.filter(touch => {
+            let [index, diameter] = touch;
+            return !(index >= this.tongueLowerIndexBound && index <= this.tongueUpperIndexBound &&
+                diameter >= this.innerTongueControlRadius && diameter <= this.outerTongueControlRadius);
+        });
+
         //other constrictions and nose
         this.velumTarget = 0.01;
-        for (let j=0; j<this.touches.length; j++)
+        for (let j=0; j<nonTongueTouches.length; j++)
         {
-            let touch = this.touches[j];
-            // let x = touch[0]
-            // let y = touch[1]
+            let touch = nonTongueTouches[j];
             let index = touch[0];
             let diameter = touch[1];
             let y = this.getXY(index, diameter)[1];
