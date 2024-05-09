@@ -11,7 +11,7 @@ const DEFAULT_LENGTH = 1; // Default length of the audio file in seconds
 
 // BodyParser configuration for parsing POST request bodies
 app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({limit: '5mb', extended: true}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 // POST route for processing audio data
 app.post("/pink-trombone", (req, res) => {
