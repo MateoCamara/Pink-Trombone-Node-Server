@@ -10,8 +10,8 @@ const DEFAULT_SEGMENTS = 44; // Default number of segments (male voice)
 const DEFAULT_LENGTH = 1; // Default length of the audio file in seconds
 
 // BodyParser configuration for parsing POST request bodies
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '5mb', extended: true}));
 
 // POST route for processing audio data
 app.post("/pink-trombone", (req, res) => {
